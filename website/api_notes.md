@@ -1,5 +1,25 @@
-# key parameters
 
+```sql
+
+create table "__aggrid_admin__"."api" (
+    id bigserial,
+    route_group  text NOT NULL,
+    route_name   text NOT NULL,
+    route_action text NOT NULL,
+    config       json NOT NULL,
+    "version"    int  NOT NULL
+
+    --composite key
+
+    --api route
+    -- api/route_group/route_name/route_action/version
+    -- if version missing order by version number select most recent
+)
+```
+
+
+
+# key parameters
 ```typescript
 /*
 used in set for select, insert,update and delete. Contains information of user calling an api route.
@@ -93,6 +113,21 @@ field to alias
 */
 
 
+/*
+Fields creates normal sql queries
+
+select col1, col2 from schema.table
+insert into schema.table (column1, column1) VALUES (value1, value2) RETURNING column1, column2 
+UPDATE schema.table SET column_1 = value_1, column_2 = value_2 WHERE id = id_value RETURNING column_1
+DELETE FROM schema.table WHERE id = id_value RETURNING x,y,z
+
+// on_conflict or on_contraint
+
+
+
+
+*/
+
 
 ```
 
@@ -104,13 +139,15 @@ field to alias
 {
     "schema": "",
     "tfnc": "",
-    "qtype": ["select", "insert", "update", "delete"]
+    "qtype": ["select", "insert", "update", "delete", "upsert"]
     /*
 
 
     */
     "fields": [
-        {"field": "", "alias": "", "type": "", "default": "", "set": "", "input": true,  "output":true, "required": false, "pk": true} //pk is in the where clause
+        {"field": "", "alias": "", "type": "", "default": "", "set": "", "input": true,  
+        "output":true, //defaults to true. if false not returene by select. Often used from returning large text strings or tsvectors used for searching only 
+        "required": false, "pk": true} //pk is in the where clause
     ]
 
     /*
@@ -126,6 +163,7 @@ field to alias
         ]
 
     ]
+    //key is from key parameters is user_id, oauth_id, etc.
     "rls": {"key": "", "operator": "", "field"},
     "batch": true
     "bind": false
@@ -136,42 +174,60 @@ field to alias
 --for select
 Select 1 from x
 --for insert/update/delete/deleted_at
+
+
+--for rls
+
+SELECT * FROM x
+WHERE key_value in (field)
+--and other fields
+--order by
+--limit
+
+
+--for batch
+INSERT INTO x (col1, col2)
+
+SELECT 
+    (element ->> 'key1')::type_1 AS key1,
+    (element ->> 'key2')::type_2  AS key2
+FROM json_array_elements(json_column) AS element;
+
+
+UPDATE x
+SET 
+FROM (
+
+) y
+WHERE x.a = a
+
+
+DELETE FROM x
+WHERE id IN (
+    SELECT from json
+)
+
 ```
+
+
+
 
 
 # INSERT
 
 ```javascript
-let x = 5;
-
+//how to handle upsert
 {
-    "ui": "grid/survey"
-    "api": {
-        "select": "",
-        "row_refresh": "", //need row id
-        "insert": "",
-        "update": "",
-        "delete": ""
-    }
-    "test_api": {
-        "select": "",
-        "insert": "",
-        "update": "",
-        "delete": ""
-    }
-    "ui_def": [
-        {"headerName": "", "field": "", 
-            "desc": "", "error_desc": "", "hide": ""
-            "ui": "",
-            "read_only" :"",
-            "is_error": "", //or is_valid
-            "is_valid": "",
-            "params": {
 
-            }    
-        }
-    ]
+    "upsert": {
+        "on_conflict": "",
+        "on_contraint": "",
+        "set": [] //if set missing or empty do nothing
+
+    }
+
 }
+
 ```
 
 # UPDATE
