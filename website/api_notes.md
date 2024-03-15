@@ -144,6 +144,10 @@ DELETE FROM schema.table WHERE id = id_value RETURNING x,y,z
 
 
     */
+
+    //insert/update/delete etc sent as json blob not as individual values
+    "json_blob": "true/false"
+
     "fields": [
         {"field": "", "alias": "", "type": "", "default": "", "set": "", "input": true,  
         "output":true, //defaults to true. if false not returene by select. Often used from returning large text strings or tsvectors used for searching only 

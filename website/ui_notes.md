@@ -9,6 +9,7 @@ let x = 5;
         "actions": ""//actions column. allow copy?
         "quickfilter": {
 
+
         }
         "api": {
             "select": "",
