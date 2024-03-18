@@ -6,11 +6,16 @@ let x = 5;
 {
     "ui": {
         "type": "grid/survey"
-        "actions": ""//actions column. allow copy?
+        "actions": ""//actions column. allow copy?. status (E. empty. etc. tool tip?)
+        "allow_empty": ""//default false.
         "quickfilter": {
 
 
         }
+
+        //based on if id present.
+        "survey_option": "" //survey options
+        //id_field from url or default select
         "api": {
             "select": "",
             "insert": "",
@@ -51,9 +56,14 @@ let x = 5;
 }
 
 
-//submodal survey
+//submodal grid
 "params": {
+    "title": ""//field name for title
+    "id": "" //fields used for id to filter out for submodal {{main_grid_field: submodal_grid_field}}
 
+    "refresh": "" //true false.
+    "refresh_row": ""//true false
+    "row_drop": ""
 
     "api": {
         "select": "",
@@ -68,7 +78,6 @@ let x = 5;
         "update": "",
         "delete": "",
         "row_refresh": "", //need row id for submodal and subsurvey
-        //row_drop
     }
     //row_drop: true //drops row in sub survey or sub grid succesful
 
