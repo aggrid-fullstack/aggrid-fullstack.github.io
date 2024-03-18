@@ -3,6 +3,7 @@
 ```javascript
 let x = 5;
 
+//is error only in calculated fields. 
 {
     "ui": {
         "type": "grid/survey"
@@ -42,6 +43,7 @@ let x = 5;
             "error_desc": "", 
             "hide": ""
             "ui": "", //infers type
+            "drag_down": "" // true or false. default false
             "read_only" :"",
             "flag": "true/false", //flags are readonly and sent back to server on each call
             "is_error": "", //mathjs expression
