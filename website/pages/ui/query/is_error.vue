@@ -1,0 +1,4 @@
+<script>
+//status is_error column with tool tip
+// field/headerName error_msg if undefined set null on save?
+</script>
