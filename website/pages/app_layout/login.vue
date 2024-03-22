@@ -1,5 +1,8 @@
 <template>
     <button class="button is-primary">
-        filter
+      About
     </button>    
+    
+    
 </template>
+

@@ -1,5 +1,6 @@
 <template>
     <button class="button is-primary">
-        filter
+        display survye based on conditions.
+        conditional submit
     </button>    
 </template>

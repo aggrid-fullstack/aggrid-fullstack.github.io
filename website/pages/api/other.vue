@@ -1,5 +1,6 @@
 <script>
-//main landing page for app
+//requires primary key
+
 export default {
     
 }
