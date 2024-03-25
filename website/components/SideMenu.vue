@@ -142,18 +142,19 @@ Roles and Permissions
 
           { group_label: 'API', 
             sub_labels: [ 
-              {route_name: 'Introduction', route_path: '/api/'},
-              {route_name: 'Select',       route_path: '/api/select'},
-              {route_name: 'Insert',       route_path: '/api/insert'},
-              {route_name: 'Upsert',       route_path: '/api/upsert'},
-              {route_name: 'Update',       route_path: '/api/update'},
-              {route_name: 'Delete',       route_path: '/api/delete'}, 
-              {route_name: 'DeleteAt',     route_path: '/api/deleted_at'},
-              {route_name: 'Other',        route_path: '/api/other'},
+              {route_name: 'Introduction',  route_path: '/api/'},
+              {route_name: 'Select',        route_path: '/api/select'},
+              {route_name: 'Insert',        route_path: '/api/insert'},
+              {route_name: 'Upsert',        route_path: '/api/upsert'},
+              {route_name: 'Update',        route_path: '/api/update'},
+              {route_name: 'Delete',        route_path: '/api/delete'}, 
+              {route_name: 'DeletedAt',     route_path: '/api/deleted_at'},
+              {route_name: 'Params',        route_path: '/api/params'},
             ]
           },
 
         ]
+        //ui_labels
         
       }
     }

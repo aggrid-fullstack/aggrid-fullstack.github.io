@@ -10,9 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
     "bulma": "^0.9.4",
     "nuxt": "^3.10.3",
-    "nuxt-highlightjs": "^1.0.3",
     "sass-loader": "^14.1.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

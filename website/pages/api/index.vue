@@ -1,15 +1,13 @@
 <template>
-    
+    <p>sup</p>
 </template>
-
 
 <script>
 
 
-
 //api table
-```sql
-
+`
+/*
 create table "__aggrid_admin__"."api" (
     id bigserial,
     route_group  text    NOT NULL,
@@ -28,9 +26,12 @@ create table "__aggrid_admin__"."api" (
     -- if only api/route_group/route_name/route_action
     -- latest is with highest version and is_prod is true
 )
-```
-//key parameters
-```typescript
+*/
+
+
+`
+//set and key parameters
+`
 /*
 used in set for select, insert,update and delete. Contains information of user calling an api route.
 now is used for when event occurs. Designed for maintaining deleted_at, updated_at and created_at
@@ -142,7 +143,7 @@ DELETE FROM schema.table WHERE id = id_value RETURNING x,y,z
 
 need to describe purpose of different options
 example user_id payload
-```
+`
 
 
 

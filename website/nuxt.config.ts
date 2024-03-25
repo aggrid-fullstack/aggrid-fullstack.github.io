@@ -2,8 +2,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+
+
   css: [
     '@/assets/main.scss'
-  ]
+  ],
+
+  // vue: {  
+  //   compilerOptions: {
+  //     isCustomElement: (tag) => ['highlightjs'].includes(tag),
+  //   },
+  // }
 
 })
