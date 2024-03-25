@@ -6,4 +6,18 @@
 export default {
     
 }
+
+/*
+
+{
+    "upsert": {
+        "on_conflict": "",
+        "on_contraint": "",
+        "set_fields": [] //if set missing or empty do nothing
+
+    }
+}
+
+*/
+
 </script>

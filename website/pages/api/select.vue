@@ -83,7 +83,7 @@ let select_params =
 
     ]
     //key is from key parameters is user_id, oauth_id, etc.
-    "rls": {"key": "", "operator": "", "field"},
+    "rls": [{"key": "", "operator": "", "field"}, //subquery: {"return_field": "schema": "table": , where: [{"main_field": "", "operator": "", "sub_field": "", subfield_type: ""}]}]
     "batch": true
     "bind": false
 }
@@ -110,11 +110,22 @@ SELECT
 FROM 
     main_table;
 
-SELECT column1, colun2, column3
+SELECT column1, column2, column3
 FROM 
     (SELECT * FROM query where :user_id = ANY (converted_array_column)) x
 
 `
 
+let payload = ``
+
+`
+SELECT ("output_1")::text as "output_alias_1"
+FROM (
+    SELECT "output_1", "output_2" FROM "xschema"."xfunction"(:input_1, :input_2)
+    --where
+    --order by
+    --limit
+) x
+`
 
 </script>

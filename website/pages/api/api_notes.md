@@ -23,9 +23,6 @@ create table "__aggrid_admin__"."api" (
 
 
 
-
-
-
 # SELECT
 ```javascript
 //for select
@@ -33,7 +30,7 @@ create table "__aggrid_admin__"."api" (
 {
     "schema": "",
     "tfnc": "",
-    "qtype": ["select", "insert", "update", "delete", "upsert"]
+    "qtype": ["select", "insert", "update", "delete", "upsert", "modify"]
     /*
 
 
@@ -116,14 +113,12 @@ WHERE id IN (
 ```javascript
 //how to handle upsert
 {
-
     "upsert": {
         "on_conflict": "",
         "on_contraint": "",
-        "set": [] //if set missing or empty do nothing
+        "set_fields": [] //if set missing or empty do nothing
 
     }
-
 }
 
 ```
