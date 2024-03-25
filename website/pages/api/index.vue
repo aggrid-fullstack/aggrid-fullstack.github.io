@@ -3,8 +3,6 @@
 </template>
 
 <script>
-
-
 export default {
 
 data() {
@@ -155,7 +153,7 @@ data() {
 
 
 //api table
-`
+
 /*
 create table "__aggrid_admin__"."api" (
     id bigserial,
@@ -176,7 +174,7 @@ create table "__aggrid_admin__"."api" (
     -- latest is with highest version and is_prod is true
 )
 */
-`
+
 
 
 

@@ -124,7 +124,7 @@ Roles and Permissions
               sub_labels: [
                 {route_name: 'OAuth Login',            route_path: '/app_layout/login'},
                 {route_name: 'Architecture',           route_path: '/app_layout/landing_page'},
-                {route_name: 'Environment Variables',  route_path: '/app_layout/grid.vue'},
+                {route_name: 'Environment Variables',  route_path: '/app_layout/grid'},
                 {route_name: 'Docker' ,                route_path: '/app_layout/survey'},
                 {route_name: 'Docker Compose',         route_path: '/app_layout/dynamic_survey'},
               ]
@@ -134,7 +134,7 @@ Roles and Permissions
             sub_labels: [
               {route_name: 'Login',          route_path: '/app_layout/login'},
               {route_name: 'Landing_Page',   route_path: '/app_layout/landing_page'},
-              {route_name: 'Grid',           route_path: '/app_layout/grid.vue'},
+              {route_name: 'Grid',           route_path: '/app_layout/grid'},
               {route_name: 'Survey',         route_path: '/app_layout/survey'},
               {route_name: 'Dynamic Survey', route_path: '/app_layout/dynamic_survey'},
             ]
