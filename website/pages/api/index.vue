@@ -114,8 +114,7 @@ data() {
                 { "directive": "data_type",   "description": "postgres types", "type": "", "require": ""},
                 { "directive": "set",         "description": "server injected value for field. default/if_null/required are ignored", "type": "", "require": ""},
                 { "directive": "default",     "description": "if value not in payload default value injected into payload", "type": "", "require": ""},
-                { "directive": "if_null",     "description": "value to use if payload field is null", "type": "", "require": ""},
-                { "directive": "required",    "description": "requires field in payload. error if missing", "type": "", "require": ""}
+                { "directive": "if_null",     "description": "value to use if payload field is null", "type": "", "require": ""}
             ]
         },
 

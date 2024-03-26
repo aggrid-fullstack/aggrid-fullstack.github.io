@@ -14,9 +14,9 @@
         <p>options</p>
     </div>
 
-    <div class="block"><highlightjs :code="delete_fields"/></div>
-    
-    <div class="block"></div><highlightjs :code="delete_params"/><div class="block"></div>
+    <div class="block"><h1 class="title">Fields </h1><highlightjs :code="delete_fields"/></div>
+    <div class="block"></div><h1 class="title">Params </h1><highlightjs :code="delete_params"/><div class="block"></div>
+    <div class="block"></div><h1 class="title">Postgres Function for Params Call </h1><highlightjs :code="delete_function"/><div class="block"></div>
 </div>
 
 </div>
@@ -29,8 +29,9 @@ export default {
 
     data() {
         return {
-            delete_fields: delete_fields,
-            delete_params: delete_params,
+            delete_fields:   delete_fields,
+            delete_params:   delete_params,
+            delete_function: delete_function
         }
     }
     
@@ -50,7 +51,7 @@ let delete_fields =
             "in": true,             //optional: defaults to true
             "out":true,             //optional: defaults to true
             "alias": "ID"           //optional: defaults to name used in field
-
+            "desc": "row id"        //optional: description of field purpose/meaning
             //set is optional specifies user information should be injected into field
         }
         {"field": "first_name",  "data_type": "text",      "alias": "FN"   "in": false, "out":true} //pk is in the where clause
@@ -73,9 +74,10 @@ data [{"id": 1, "FN": "Mike"}]
 
 let delete_params =
 `{
-    schema: "example_schema",
-    tfnc:   "example_function",
-    qtype:  "delete",
+    schema: "example_schema",    //required
+    tfnc:   "example_function",  //required
+    qtype:  "delete",            //required: action of route.
+    desc:   "deletes record"     //optional: descripes api endpoints purpose
 
     //in field specified for params.in is added to the function in the order its defined
     "params": [
@@ -84,7 +86,9 @@ let delete_params =
             {   
                 "field":     "id",  //required: Values injected in order this would be in position 1. Name doesnt matter
                 "data_type": "int"  //required: type must match function requirement.
-                //"default" is optional can inject a value if missing. if default not specified then its required in payload 
+                "desc": "row id"    //optional: description of field purpose/meaning
+                //"default" is optional can inject a value if missing. if default not specified then its required in payload
+
             {   
                 "field": "user_id", 
                 "set":   "user_id"  //optional: set injects user_id value by server. 
@@ -120,7 +124,8 @@ output payload:
 */
 `
 
-/*
+let delete_function =
+`/*
 CREATE OR REPLACE FUNCTION insert_and_return()
 RETURNS TABLE (ID INT, Name VARCHAR) AS $$
 BEGIN
@@ -132,7 +137,7 @@ BEGIN
     RETURN NEXT;
 END;
 $$ LANGUAGE plpgsql;
-*/
+*/`
 
 
 
