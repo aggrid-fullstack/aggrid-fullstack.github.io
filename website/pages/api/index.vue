@@ -1,5 +1,7 @@
 <template>
-    <p>sup</p>
+    <p>All values are sent and received as strings. 
+        Type conversion is done by the browser, data server or end client
+    </p>
 </template>
 
 <script>
@@ -9,7 +11,6 @@ data() {
     return {
 
         //example table and api payload call
-
         global_directives: {
             title:  "",
             desc: "primary directives used to describe structure of query and what database objects to use",
@@ -35,19 +36,6 @@ data() {
                         Allows quick implementation of user specific row level security`},
             ]
         },
-
-        // All values are sent and received as strings. Type conversion is done by the browser, data server or end client
-        /*
-            Defaults are values added to the data payload if missing. For fields array If default is not specified nothing is added and 
-            the server handles undefined values
-
-            Fields creates normal sql queries
-
-            select col1, col2 from schema.table
-            insert into schema.table (column1, column1) VALUES (value1, value2) RETURNING column1, column2 
-            UPDATE schema.table SET column_1 = value_1, column_2 = value_2 WHERE id = id_value RETURNING column_1
-            DELETE FROM schema.table WHERE id = id_value RETURNING x,y,z
-        */
 
         fields_directives: {
             title:  "",
@@ -163,10 +151,25 @@ data() {
 
         upsert_values: { //for set
             title:  "",
+            desc:   `
+            
+            using on_conflict
+            upsert: {
+                on_conflict: name_of_unique_column
+                set_fields: [ ] //list of fields to update on conflict
+            }
+            
+            using on_constraint
+            upsert: {
+                on_conflict: name_of_uniqueness_constraint
+                set_fields: [ ] //list of fields to update on conflict
+            }
+
+            `,
             header: ['Directive', 'Description'],
             rows:  [
-                { "directive": "on_conflict/on_constraint",    "description": "", "type": "", "require": ""},
-                { "directive": "set_fields",      "description": "if set missing or empty do nothing", "type": "[text]", "require": ""}
+                { "directive": "on_conflict/on_constraint",    "description": "specifices contraint name and type", "type": "text", "require": "one or the other must be present"},
+                { "directive": "set_fields",      "description": "if set missing or empty do nothing is used during upsert", "type": "[text]", "require": ""}
             ]
         },
     }
@@ -197,9 +200,4 @@ create table "__aggrid_admin__"."api" (
     -- latest is with highest version and is_prod is true
 )
 */
-
-
-
-
-
 </script>
