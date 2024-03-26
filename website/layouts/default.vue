@@ -1,10 +1,10 @@
 <template>
     <MainNavBar />
     <div class="columns">
-      <div class="column is-2 is-narrow-mobile is-fullheight is-hidden-mobile">
+      <div class="column is-2 is-narrow-mobile is-fullheight is-hidden-mobile" id="side-menu">
         <SideMenu />
       </div>
-      <div class="column is-10">
+      <div class="column is-10" id="main-body">
         <NuxtPage />
       </div>
     </div>
@@ -22,3 +22,16 @@
   }
   </script>
   
+<style scoped>
+
+#side-menu {
+  max-height: calc(100vh - 3rem); /* Full height minus navbar height */
+  overflow-y: auto;
+}
+
+#main-body {
+  max-height: calc(100vh - 3rem); /* Full height minus navbar height */
+  overflow-y: auto;
+}
+
+</style>

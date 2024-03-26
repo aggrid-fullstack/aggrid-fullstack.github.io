@@ -130,6 +130,24 @@ data() {
             ]
         },
 
+        rls_directives: {
+            title: "",
+            desc:  "",
+            header: [],
+            rows:   []
+
+        },
+
+
+        aggrid_meta_directives: {
+            title: "",
+            desc:  "cell level security. row height ...",
+            header: [],
+            rows:   []
+
+        },
+
+
 
         key_values: { //for set
             title: "",
