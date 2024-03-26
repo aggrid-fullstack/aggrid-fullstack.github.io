@@ -5,7 +5,9 @@
         <SideMenu />
       </div>
       <div class="column is-10" id="main-body">
-        <NuxtPage />
+        <div class="container"> 
+          <NuxtPage />
+        </div>
       </div>
     </div>
   </template>
