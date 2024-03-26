@@ -37,14 +37,13 @@ export default {
 }
 
 let delete_fields =
-`
-{
+`{
     schema: "example_schema",  //required: must exist in postgres and connection string must have necessary permissions
     tfnc:   "example_table",   //required: must exist in postgres and connection string must have necessary permissions
     qtype:  "delete",          //required: specifies query to create. connection string must have necessary permissions 
 
     //any input: true is sent into where clause. output: true is added to returning clause
-    //by default input and output are set to true
+    //by default input and output are set to true. all in:true are required by payload or injected by server using set.
     "fields": [
         {   "field": "id",          //required: name must exist in postgres table
             "data_type": "bigint",  //required: must match type in postgres
@@ -52,6 +51,7 @@ let delete_fields =
             "out":true,             //optional: defaults to true
             "alias": "ID"           //optional: defaults to name used in field
 
+            //set is optional specifies user information should be injected into field
         }
         {"field": "first_name",  "data_type": "text",      "alias": "FN"   "in": false, "out":true} //pk is in the where clause
     ]
@@ -59,49 +59,64 @@ let delete_fields =
 
 /*
 input payload
-data: [{id: 1}]
+data: [{"id": 1}]
 
 //query
 DELETE FROM "example_schema"."example_table" WHERE id = :id RETURNING ("id")::text as "ID", 
     ("first_name")::text as "FN"
 
 output
-data [{id: 1, FN: "Mike"}]
+data [{"id": 1, "FN": "Mike"}]
 
 */
 `
 
 let delete_params =
-`
-{
+`{
     schema: "example_schema",
     tfnc:   "example_function",
     qtype:  "delete",
 
-    //any input: true is sent into where clause. output: true is added to returning clause
+    //in field specified for params.in is added to the function in the order its defined
     "params": [
         "in": {
-            {"field": "id", "data_type": "int" }    //pk is in the where clause
-            {"field": "user_id", "set": "user_id" } //set injects value by server.
+            //if empty assumes function has no arguments
+            {   
+                "field":     "id",  //required: Values injected in order this would be in position 1. Name doesnt matter
+                "data_type": "int"  //required: type must match function requirement.
+                //"default" is optional can inject a value if missing. if default not specified then its required in payload 
+            {   
+                "field": "user_id", 
+                "set":   "user_id"  //optional: set injects user_id value by server. 
+            }
         },
         "out": [
-            {"field": "id" }
-            {"field": "first_name",  "alias": "FN"   "set": "", }
+            //outfields are optional. if empty nothing is returned
+            {   
+                "field":     "id",  //required: name of returned column
+                "data_type": "int", //required: type of column
+                "alias":     "ID" , //optional: output name for field
+        
+            }
+            {   "field": "first_name", "data_type": "text",  "alias": "FN"}
         ]
     ]
 }
 
 /*
 input payload:
-    data: [{id: 1}]
+    data: [{"id": 1}]
+
+sever injected payload:
+    data: [{"id": 1, "user_id": 1}]
 
 //query (user_id injected by server using set command)
 
-SELECT ("id")::text as "id", ("first_name")::text as "FN" 
+SELECT ("id")::text as "ID", ("first_name")::text as "FN" 
     FROM "example_schema"."example_function"(:id, :user_id)
 
 output payload:
-    data [{id: 1, FN: "Mike"}]
+    data [{"id": 1, "FN": "Mike"}]
 */
 `
 
