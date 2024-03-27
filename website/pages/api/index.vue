@@ -78,6 +78,11 @@ data() {
                     "description": "default true. is payload included in query, filters"},
                 { "directive": "out", "type": "boolean", "require": "",
                     "description": "default true is field returned"},
+                { "directive": "ts_rank", "type": "boolean", "require": "{doc_field: field_name }",
+                    "description": "if field name present. uses text search and text rank"},
+                    //inorder unless specified by order_by if order_by used and no input ignored.
+                { "directive": "ts_config", "type": "text", "require": "{doc_field: field_name }",
+                    "description": "config for text search defaults to english"},
             ]
         },
 
@@ -156,13 +161,13 @@ data() {
                 columns if being used All values are sent and received as strings. Type conversion is done by the browser, data server or end client`,
             header: ['Directive', 'Description'],
             rows:  [
-                { "directive": "user_id",     "description": "", "type": "", "require": ""},
-                { "directive": "oauth_id",    "description": "", "type": "", "require": ""},
-                { "directive": "email",       "description": "", "type": "", "require": ""},
-                { "directive": "first_name",  "description": "", "type": "", "require": ""},
-                { "directive": "middle_name", "description": "", "type": "", "require": ""},
-                { "directive": "last_name",   "description": "", "type": "", "require": ""},
-                { "directive": "now",         "description": "", "type": "", "require": ""}
+                { "directive": "user_id",     "description": "id for user calling api", "type": "", "require": ""},
+                // { "directive": "oauth_id",    "description": "", "type": "", "require": ""},
+                // { "directive": "email",       "description": "", "type": "", "require": ""},
+                // { "directive": "first_name",  "description": "", "type": "", "require": ""},
+                // { "directive": "middle_name", "description": "", "type": "", "require": ""},
+                // { "directive": "last_name",   "description": "", "type": "", "require": ""},
+                { "directive": "now",         "description": "injects now() function as value", "type": "", "require": ""}
             ]
         },
 

@@ -28,30 +28,38 @@ export default {
 let deletedat_fields =
 `
 {
-schema: "example_schema",
-tfnc:   "example_table",
-qtype:  "delete",
+schema: "example_schema", //required
+tfnc:   "example_table",  //required
+qtype:  "deleted_at",     //required
 
 //any input: true is sent into where clause. output: true is added to returning clause
 //by default input and output are set to true
 "fields": [
-    {"field": "id",          "alias": "",    "input": true,  "output":true} //pk is in the where clause
-    {"field": "updated_at",  "set":   "now", "input": true,  "output":true} //pk is in the where clause
+    {   "field": "id", 
+        "alias": "ID",   //optional alias for input output name
+        "input": true,  //optional defaults to true. if pk true this is set to true
+        "output":true  //optional defaults to true
+        "pk": true     //required for at least one field. 
+    } 
+    {   "field": "deleted_at",
+        "set":   "now",  //required atleast once. one field must have datetime set to store deleted_at time
+        "input":  true,
+        "output": true,
+    } 
     {"field": "first_name",  "alias": "FN"   "input": false, "output":true} //pk is in the where clause
 ]
 }
 
 /*
 input payload
-data: [{id: 1}]
+    data: [{id: 1}]
 
 query
-UPDATE "example_schema"."example_table" set updated_at = now() WHERE id = :id RETURNING ("id")::text as id, 
+UPDATE "example_schema"."example_table" set deleted_at = now() WHERE id = :id RETURNING ("id")::text as "ID", 
     ("first_name")::text as "FN", ("updated_at")::text as "updated_at"
 
 output
-data [{id: 1, FN: "Mike", "updated_at": "2004-10-19 10:23:54+02" }]
-
+    data [{id: 1, FN: "Mike", "deleted_at": "2004-10-19 10:23:54+02" }]
 */
 `
 

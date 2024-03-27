@@ -14,9 +14,11 @@
         <p>options</p>
     </div>
 
+
+
     <div class="block"><h1 class="title">Fields </h1><highlightjs :code="delete_fields"/></div>
-    <div class="block"></div><h1 class="title">Params </h1><highlightjs :code="delete_params"/><div class="block"></div>
-    <div class="block"></div><h1 class="title">Postgres Function for Params Call </h1><highlightjs :code="delete_function"/><div class="block"></div>
+    <div class="block"></div><h1 class="title">Params </h1><highlightjs  :code="delete_params"/><div class="block"></div>
+    <div class="block"></div><h1 class="title">Postgres Function for Params Call </h1><highlightjs  :code="delete_function"/><div class="block"></div>
 </div>
 
 </div>
@@ -38,7 +40,8 @@ export default {
 }
 
 let delete_fields =
-`{
+`
+{
     schema: "example_schema",  //required: must exist in postgres and connection string must have necessary permissions
     tfnc:   "example_table",   //required: must exist in postgres and connection string must have necessary permissions
     qtype:  "delete",          //required: specifies query to create. connection string must have necessary permissions 
@@ -125,19 +128,23 @@ output payload:
 `
 
 let delete_function =
-`/*
+`
 CREATE OR REPLACE FUNCTION insert_and_return()
 RETURNS TABLE (ID INT, Name VARCHAR) AS $$
 BEGIN
-    -- Perform the insert using RETURNING
+    // Perform the insert using RETURNING
     INSERT INTO your_table_name (name) VALUES ('John')
     RETURNING id, name INTO ID, Name;
+
+    SELECT 1 FROM x WHERE id = 1;
+
+    UPDATE x set v =1 where id =1;
 
     -- Return the inserted data
     RETURN NEXT;
 END;
 $$ LANGUAGE plpgsql;
-*/`
+`
 
 
 
